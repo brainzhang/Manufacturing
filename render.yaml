@@ -1,1 +1,66 @@
 
+# Render Blueprint for PPM 3.0 Application
+# https://render.com/docs/blueprint-spec
+
+blueprintVersion: 1
+
+# Define the database service
+databases:
+  - name: ppm3-mongodb
+    databaseName: ppm3
+    user: admin
+    plan: free
+    disk: 10
+
+# Define the Redis service
+redises:
+  - name: ppm3-redis
+    plan: free
+    maxmemoryPolicy: noeviction
+    maxmemorySamples: 5
+
+# Define the web services
+services:
+  - type: web
+    name: ppm3-backend
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: ppm3-mongodb
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: ppm3-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 3000
+
+  - type: web
+    name: ppm3-frontend
+    env: static
+    plan: free
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: ppm3-backend
+          envVarKey: RENDER_EXTERNAL_URL
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"
