@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # Backend API
+  api:
+    build:
+      context: ./server
+      dockerfile: ../docker/app/Dockerfile
+    container_name: ppm3-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI:-mongodb://admin:password@localhost:27017/ppm3?authSource=admin}
+      - REDIS_URL=${REDIS_URL:-redis://localhost:6379}
+      - JWT_SECRET=${JWT_SECRET:-ppm3_jwt_secret}
+      - PORT=3000
+    networks:
+      - ppm3-network
+
+  # Frontend application
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ../docker/app/Dockerfile.frontend
+    container_name: ppm3-frontend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:3000/api/v1}
+    depends_on:
+      - api
+    networks:
+      - ppm3-network
+
+  # Nginx reverse proxy
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    container_name: ppm3-nginx
+    ports:
+      - "10000:80"
+    depends_on:
+      - frontend
+      - api
+    networks:
+      - ppm3-network
+
+networks:
+  ppm3-network:
+    driver: bridge

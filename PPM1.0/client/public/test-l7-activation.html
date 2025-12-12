@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L7替代料激活测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-step {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+        }
+        .expected-result {
+            background-color: #e6f7ff;
+            padding: 10px;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+        .actual-result {
+            background-color: #fff1f0;
+            padding: 10px;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+        .success {
+            color: #52c41a;
+        }
+        .error {
+            color: #ff4d4f;
+        }
+        .warning {
+            color: #faad14;
+        }
+        .info {
+            color: #1890ff;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+        .code-block {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>L7替代料激活功能调试报告</h1>
+    
+    <div class="test-section">
+        <h2>问题描述</h2>
+        <p>用户反馈L7替代料激活问题仍未解决，需要进行debugging。</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>已修复的问题</h2>
+        <div class="test-step">
+            <h3>1. L7替代料按钮渲染条件</h3>
+            <div class="code-block">
+修复前：isAlternative && record.lifecycle === 'Active' && (record.itemStatus === 'Inactive' || record.itemStatus === 'Active')
+修复后：isAlternative && (record.itemStatus === 'Inactive' || record.itemStatus === 'Active')
+            </div>
+            <p class="info">说明：移除了对lifecycle为'Active'的限制，现在只要itemStatus为'Inactive'或'Active'就显示按钮。</p>
+        </div>
+        
+        <div class="test-step">
+            <h3>2. L7替代料parentId指向问题</h3>
+            <div class="code-block">
+修复前：parentId: node.id (L5父节点ID)
+修复后：parentId: targetL6.key (L6主料节点key)
+            </div>
+            <p class="info">说明：修正了新创建L7替代料节点的parentId，确保它指向对应的L6主料。</p>
+        </div>
+        
+        <div class="test-step">
+            <h3>3. 初始数据结构parentId修正</h3>
+            <div class="code-block">
+修复前：parentId: caseMain.id (使用id字段)
+修复后：parentId: caseMain.key (使用key字段)
+            </div>
+            <p class="info">说明：修正了所有L7替代料的初始数据结构，确保parentId指向L6主料的key而非id。</p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>添加的调试日志</h2>
+        <div class="test-step">
+            <h3>1. L7替代料按钮点击日志</h3>
+            <div class="code-block">
+console.log('L7替代料按钮被点击，record:', record);
+            </div>
+        </div>
+        
+        <div class="test-step">
+            <h3>2. handleReplacePart函数参数日志</h3>
+            <div class="code-block">
+console.log('handleReplacePart called with alternativeNode:', alternativeNode);
+console.log('alternativeNode.level:', alternativeNode.level);
+console.log('alternativeNode.parentId:', alternativeNode.parentId);
+console.log('alternativeNode.position:', alternativeNode.position);
+console.log('alternativeNode.itemStatus:', alternativeNode.itemStatus);
+            </div>
+        </div>
+        
+        <div class="test-step">
+            <h3>3. L6节点查找结果日志</h3>
+            <div class="code-block">
+console.log('After findL6Node:');
+console.log('l6Node:', l6Node);
+console.log('parentNode:', parentNode);
+            </div>
+        </div>
+        
+        <div class="test-step">
+            <h3>4. BOM结构更新结果日志</h3>
+            <div class="code-block">
+console.log('After updateBOMStructure:');
+console.log('newData:', newData);
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>测试步骤</h2>
+        <div class="test-step">
+            <h3>步骤1：打开BOM页面</h3>
+            <p>访问 http://localhost:3002 并导航到BOM管理页面</p>
+        </div>
+        
+        <div class="test-step">
+            <h3>步骤2：弃用L6主料</h3>
+            <p>点击任意L6主料的"弃用"按钮，将其状态从Active改为Deprecated</p>
+            <div class="expected-result">
+                预期结果：L6主料状态变为Deprecated，数量变为0，生命周期变为PhaseOut
+            </div>
+        </div>
+        
+        <div class="test-step">
+            <h3>步骤3：检查L7替代料状态</h3>
+            <p>查看对应的L7替代料是否自动激活</p>
+            <div class="expected-result">
+                预期结果：L7替代料状态自动变为Active，数量恢复为1，生命周期变为Active
+            </div>
+        </div>
+        
+        <div class="test-step">
+            <h3>步骤4：手动激活L7替代料</h3>
+            <p>如果L7替代料未自动激活，点击其"替换"按钮</p>
+            <div class="expected-result">
+                预期结果：L7替代料状态变为Active，对应的L6主料状态变为Inactive
+            </div>
+        </div>
+        
+        <div class="test-step">
+            <h3>步骤5：检查BOM结构和成本</h3>
+            <p>确认BOM结构正确更新，总成本重新计算</p>
+            <div class="expected-result">
+                预期结果：BOM树结构正确显示，总成本基于激活的零件重新计算
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>可能的问题点</h2>
+        <div class="test-step">
+            <h3>1. L6节点查找失败</h3>
+            <p class="warning">findL6Node函数可能无法正确找到对应的L6主料节点</p>
+            <p>解决方案：检查parentId和position匹配逻辑</p>
+        </div>
+        
+        <div class="test-step">
+            <h3>2. BOM结构更新失败</h3>
+            <p class="warning">updateBOMStructure函数可能无法正确更新节点状态</p>
+            <p>解决方案：检查节点匹配和状态更新逻辑</p>
+        </div>
+        
+        <div class="test-step">
+            <h3>3. 成本计算错误</h3>
+            <p class="warning">calculateInitialCost函数可能无法正确计算L7替代料激活后的成本</p>
+            <p>解决方案：检查L6/L7成本计算优先级逻辑</p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>调试建议</h2>
+        <ol>
+            <li>打开浏览器开发者工具的控制台</li>
+            <li>按照上述测试步骤操作</li>
+            <li>观察控制台输出的调试日志</li>
+            <li>特别关注L6节点查找和BOM结构更新的日志</li>
+            <li>如果发现问题，根据日志信息定位具体原因</li>
+        </ol>
+    </div>
+    
+    <script>
+        // 简单的页面交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('L7替代料激活测试页面已加载');
+            console.log('请按照测试步骤进行操作，并查看浏览器控制台的日志输出');
+        });
+    </script>
+</body>
+</html>

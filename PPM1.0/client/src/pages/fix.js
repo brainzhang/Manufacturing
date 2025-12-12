@@ -1,0 +1,1 @@
+const csvContent = [headers, exampleData].map(row => row.join(',')).join('\n');

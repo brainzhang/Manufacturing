@@ -1,0 +1,229 @@
+.diffTreeContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 搜索容器样式 */
+.searchContainer {
+  margin-bottom: 8px;
+}
+
+/* 搜索结果高亮 */
+.highlight {
+  background-color: #fff2e8;
+  color: #fa541c;
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.treeTitle {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.legendDotStructure {
+  color: #ff4d4f;
+  font-size: 8px;
+}
+
+.legendDotProperty {
+  color: #fa8c16;
+  font-size: 8px;
+}
+
+.legendDotFixed {
+  color: #52c41a;
+  font-size: 8px;
+}
+
+.treeWrapper {
+  flex: 1;
+  overflow: auto;
+  padding-right: 4px;
+  position: relative;
+}
+
+/* 加载状态容器 */
+.loadingContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 空结果容器 */
+.emptyContainer {
+  padding: 40px 20px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+}
+
+.tree {
+  font-size: 14px;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 优化节点悬停效果 */
+.node:hover {
+  background-color: #f5f5f5;
+  transform: translateX(2px);
+}
+
+.node:hover {
+  background-color: #f5f5f5;
+}
+
+.nodeText {
+  flex: 1;
+}
+
+/* 结构差异 - 红色 */
+.structureDiff {
+  color: #ff4d4f;
+}
+
+.structureDiff:hover {
+  background-color: #fff1f0;
+}
+
+.structureIcon {
+  color: #ff4d4f;
+}
+
+/* 属性差异 - 橙色 */
+.propertyDiff {
+  color: #fa8c16;
+}
+
+.propertyDiff:hover {
+  background-color: #fffbe6;
+}
+
+.propertyIcon {
+  color: #fa8c16;
+}
+
+/* 已修复 - 绿色 */
+.fixedDiff {
+  color: #52c41a;
+}
+
+.fixedDiff:hover {
+  background-color: #f6ffed;
+}
+
+.fixedIcon {
+  color: #52c41a;
+}
+
+/* 确保树节点行高一致 */
+.tree .ant-tree-node-content-wrapper {
+  height: auto;
+  padding: 0;
+}
+
+.treeFooter {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.hint {
+  margin: 0;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}
+
+/* 自定义滚动条 */
+.treeWrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.treeWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.treeWrapper::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.treeWrapper::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .diffTreeContainer {
+    padding: 12px;
+  }
+  
+  .treeTitle {
+    font-size: 14px;
+  }
+  
+  .legend {
+    gap: 8px;
+  }
+  
+  .legendItem {
+    font-size: 11px;
+  }
+  
+  .node {
+    font-size: 13px;
+    padding: 3px 6px;
+    gap: 4px;
+  }
+  
+  .searchContainer .ant-input-search {
+    width: 100%;
+  }
+}

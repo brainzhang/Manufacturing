@@ -1,0 +1,126 @@
+.syncButtonContainer {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.syncButton {
+  min-width: 140px;
+  height: 48px;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 16px;
+}
+
+.syncButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 77, 79, 0.4);
+}
+
+.syncButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.syncCount {
+  background-color: #fff;
+  color: #ff4d4f;
+  padding: 0 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.progressContainer {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+}
+
+.progress {
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress .ant-progress-bg {
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(110%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .syncButtonContainer {
+    right: 16px;
+    bottom: 16px;
+  }
+  
+  .syncButton {
+    min-width: 120px;
+    height: 44px;
+    font-size: 13px;
+    padding: 0 12px;
+  }
+  
+  .syncCount {
+    font-size: 11px;
+    padding: 0 6px;
+  }
+  
+  .progressContainer {
+    max-width: 180px;
+  }
+  
+  .progressText {
+    font-size: 10px;
+    transform: translate(100%, -50%);
+  }
+}
+
+/* 禁用状态样式 */
+.syncButton:disabled {
+  background-color: #d9d9d9;
+  border-color: #d9d9d9;
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.syncButton:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}

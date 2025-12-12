@@ -1,0 +1,264 @@
+.layout {
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+/* 顶部同步进度条 */
+.syncProgress {
+  position: relative;
+  margin: 0;
+  z-index: 10;
+}
+
+/* 顶部区域 */
+.header {
+  background-color: #fff;
+  padding: 20px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 100; /* 确保header在最上层 */
+}
+
+.headerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.pageTitle h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+}
+
+.pageSubtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* KPI卡片区域 */
+.kpiCards {
+  margin: 24px 0;
+}
+
+.kpiCard {
+  text-align: center;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.kpiCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.kpiTitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.kpiValue {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.kpiTrend {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.trendUp {
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.trendDown {
+  background-color: #fff1f0;
+  color: #ff4d4f;
+}
+
+.costUp {
+  color: #ff4d4f;
+}
+
+.costDown {
+  color: #52c41a;
+}
+
+.pieChartPlaceholder {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 雷达图中间区域 */
+.radarMiddleSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* 雷达图卡片 */
+.radarCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 16px;
+}
+
+/* 主要内容区域 */
+.content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.mainContent {
+  min-height: calc(100vh - 300px); /* 调整主内容区域高度以适应变化 */
+}
+
+/* 差异树区域 */
+.treeColumn {
+  height: 100%;
+  position: relative;
+}
+
+.treeCard {
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 差异表格区域 */
+.tableColumn {
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.tableCard {
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 底部批量操作栏 */
+.footer {
+  background-color: #fff;
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 0;
+  position: relative;
+  margin-top: 40px;
+  z-index: 10;
+}
+
+.batchActions {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.batchButton {
+  padding: 8px 24px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.batchButton:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.primaryButton {
+  background-color: #1890ff;
+  color: #fff;
+  border-color: #1890ff;
+}
+
+.primaryButton:hover {
+  background-color: #40a9ff;
+  color: #fff;
+  border-color: #40a9ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .kpiCards {
+    margin: 16px 0;
+  }
+  
+  .pageTitle h1 {
+    font-size: 24px;
+  }
+  
+  .batchActions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .content {
+    padding-bottom: 150px;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kpiCard, .radarCard, .treeCard, .tableCard {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

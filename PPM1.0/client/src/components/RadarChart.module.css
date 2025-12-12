@@ -1,0 +1,88 @@
+.radarChartContainer {
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.chartTitle {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.chartSubtitle {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.tooltip {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 150px;
+}
+
+.tooltipLabel {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.tooltipItemLocal {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #1890ff;
+}
+
+.tooltipItemSAP {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #52c41a;
+}
+
+.tooltipDiff {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  color: #999;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 8px;
+}
+
+.chartFooter {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.clickHint {
+  margin: 0;
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+}
+
+.clickHint:hover {
+  color: #1890ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .radarChartContainer {
+    padding: 16px;
+  }
+  
+  .chartTitle {
+    font-size: 16px;
+  }
+  
+  .chartSubtitle {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+}

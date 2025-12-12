@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: ppm3-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ppm3-network
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7.0
+    container_name: ppm3-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ppm3-network
+    restart: unless-stopped
+
+  # Backend API
+  api:
+    build:
+      context: ./server
+      dockerfile: ../docker/app/Dockerfile
+    container_name: ppm3-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://admin:password@mongodb:27017/ppm3?authSource=admin
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=ppm3_jwt_secret
+      - PORT=3000
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - ppm3-network
+    restart: unless-stopped
+
+  # Frontend application
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ../docker/app/Dockerfile.frontend
+    container_name: ppm3-frontend
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=http://api:3000/api/v1
+    depends_on:
+      - api
+    networks:
+      - ppm3-network
+    restart: unless-stopped
+
+networks:
+  ppm3-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  redis_data:

@@ -1,0 +1,7 @@
+/* BOMGenerator组件样式 */
+
+/* 置灰带删除线样式 */
+.disabledRow {
+  opacity: 0.5;
+  text-decoration: line-through;
+}

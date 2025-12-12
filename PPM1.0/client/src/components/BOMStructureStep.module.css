@@ -1,0 +1,111 @@
+/* BOMStructureStep组件样式 */
+.bom-structure-step .step-card {
+  margin-bottom: 24px;
+}
+
+.structure-tools {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.bom-tree-container {
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  min-height: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.template-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.template-card {
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.template-card:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+}
+
+.template-card.selected {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+}
+
+.template-card h4 {
+  margin: 0 0 8px 0;
+}
+
+.template-card p {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+}
+
+/* 拖拽样式 */
+.ant-tree-node-content-wrapper {
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.ant-tree-node-content-wrapper:hover {
+  background-color: #f5f5f5;
+}
+
+.ant-tree-node-content-wrapper.drag-over {
+  background-color: #e6f7ff;
+  border: 1px dashed #1890ff;
+}
+
+.ant-tree-treenode-selected .ant-tree-node-content-wrapper {
+  background-color: #e6f7ff;
+}
+
+/* 零件表格样式 */
+.ant-table-small > .ant-table-content > .ant-table-body {
+  margin: 0;
+}
+
+.ant-table-tbody > tr > td {
+  padding: 8px;
+}
+
+/* 上传区域样式 */
+.ant-upload-drag {
+  border: 1px dashed #d9d9d9;
+  border-radius: 4px;
+  background-color: #fafafa;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.ant-upload-drag:hover {
+  border-color: #1890ff;
+}
+
+.ant-upload-drag.ant-upload-drag-hover {
+  border-color: #1890ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .bom-structure-step .ant-col:first-child {
+    span: 24;
+  }
+  
+  .bom-structure-step .ant-col:last-child {
+    span: 24;
+    margin-top: 16px;
+  }
+}

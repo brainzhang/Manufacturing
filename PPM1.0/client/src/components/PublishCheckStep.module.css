@@ -1,0 +1,221 @@
+.publishCheckStep {
+  width: 100%;
+  padding: 16px;
+}
+
+/* 整体状态卡片样式 */
+.overallStatusCard {
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.statusHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.statusIcon {
+  font-size: 48px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statusContent {
+  flex: 1;
+}
+
+.statusTitle {
+  margin-bottom: 8px !important;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.statusDescription {
+  margin-bottom: 0 !important;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.statusProgress {
+  margin-top: 8px;
+}
+
+/* 检查卡片样式 */
+.checkCard {
+  height: 100%;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.checkCard .ant-card-head {
+  border-bottom: 1px solid #f0f0f0;
+  min-height: auto;
+}
+
+.checkCard .ant-card-head-title {
+  padding: 8px 0;
+}
+
+.checkCard .ant-card-body {
+  padding: 16px;
+}
+
+.checkItem {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.checkItem:last-child {
+  border-bottom: none;
+}
+
+.checkItem .ant-list-item-meta-title {
+  margin-bottom: 4px;
+}
+
+.checkItem .ant-list-item-meta-description {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 12px;
+}
+
+/* 问题卡片样式 */
+.issuesCard {
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.issuesCard .ant-card-head {
+  border-bottom: 1px solid #f0f0f0;
+  min-height: auto;
+}
+
+.issuesCard .ant-card-head-title {
+  padding: 8px 0;
+}
+
+.issuesCard .ant-card-body {
+  padding: 16px;
+}
+
+/* 操作按钮样式 */
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* 表格样式优化 */
+.ant-table-small > .ant-table-content > .ant-table-body {
+  margin: 0;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: #f5f5f5;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #fafafa;
+}
+
+.ant-table-tbody > tr > td {
+  padding: 8px 12px;
+}
+
+/* 标签样式优化 */
+.ant-tag {
+  margin: 0;
+}
+
+/* 进度条样式优化 */
+.ant-progress-line {
+  margin-bottom: 0;
+}
+
+/* 徽章样式优化 */
+.ant-badge {
+  margin-left: 8px;
+}
+
+/* 空状态样式 */
+.ant-empty {
+  margin: 16px 0;
+}
+
+/* 加载状态样式 */
+.ant-spin-container {
+  position: relative;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .checkCard {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .publishCheckStep {
+    padding: 8px;
+  }
+  
+  .statusHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .statusIcon {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+  
+  .statusTitle {
+    font-size: 18px !important;
+  }
+  
+  .actionButtons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .actionButtons .ant-space {
+    width: 100%;
+  }
+  
+  .actionButtons .ant-btn {
+    width: 100%;
+  }
+}
+
+/* 动画效果 */
+.checkCard {
+  transition: all 0.3s ease;
+}
+
+.checkCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 状态图标动画 */
+.statusIcon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

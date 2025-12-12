@@ -1,0 +1,153 @@
+.diffTableContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.tableTitle {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.tableSubtitle {
+  margin: 0 0 16px 0;
+  font-size: 12px;
+  color: #999;
+}
+
+.table {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* 成本变化颜色 */
+.costIncrease {
+  color: #ff4d4f;
+  font-weight: 500;
+}
+
+.costDecrease {
+  color: #52c41a;
+  font-weight: 500;
+}
+
+/* 已修复的文本样式 */
+.fixedText {
+  color: #52c41a;
+  text-decoration: line-through;
+}
+
+/* 行高亮效果 */
+.highlightRow {
+  background-color: #e6f7ff !important;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* 自定义表格样式 */
+.table :global(.ant-table-thead > tr > th) {
+  background-color: #fafafa;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.table :global(.ant-table-tbody > tr > td) {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.table :global(.ant-table-tbody > tr:hover > td) {
+  background-color: #f5f5f5;
+}
+
+/* 确保表格行高适中 */
+.table :global(.ant-table-tbody > tr) {
+  height: 48px;
+}
+
+/* 分页样式 */
+.table :global(.ant-table-pagination) {
+  margin-top: 16px;
+}
+
+/* 复选框样式调整 */
+.table :global(.ant-checkbox-inner) {
+  transform: scale(0.9);
+}
+
+/* 按钮样式微调 */
+.table :global(.ant-btn) {
+  padding: 2px 8px;
+  font-size: 12px;
+  height: 24px;
+}
+
+/* 标签样式调整 */
+.table :global(.ant-tag) {
+  font-size: 11px;
+  padding: 0 6px;
+  height: 20px;
+  line-height: 18px;
+}
+
+/* 确保固定列正常显示 */
+.table :global(.ant-table-fixed-right) {
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 空数据状态样式 */
+.table :global(.ant-empty) {
+  padding: 60px 0;
+}
+
+/* 表格滚动条样式 */
+.table :global(.ant-table-body::-webkit-scrollbar) {
+  width: 8px;
+  height: 8px;
+}
+
+.table :global(.ant-table-body::-webkit-scrollbar-track) {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table :global(.ant-table-body::-webkit-scrollbar-thumb) {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.table :global(.ant-table-body::-webkit-scrollbar-thumb:hover) {
+  background: #999;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .diffTableContainer {
+    padding: 12px;
+  }
+  
+  .tableTitle {
+    font-size: 14px;
+  }
+  
+  .table :global(.ant-table-thead > tr > th) {
+    font-size: 12px;
+    padding: 8px 4px;
+  }
+  
+  .table :global(.ant-table-tbody > tr > td) {
+    font-size: 12px;
+    padding: 8px 4px;
+  }
+  
+  .table :global(.ant-btn) {
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+}
