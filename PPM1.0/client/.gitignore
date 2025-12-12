@@ -1,9 +1,9 @@
 # Dependencies
 node_modules/
 
-# Build outputs
-dist/
-build/
+# Build outputs (commented out to allow dist/ for deployment)
+# dist/
+# build/
 
 # Environment files
 .env.local
