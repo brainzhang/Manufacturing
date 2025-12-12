@@ -1,0 +1,8 @@
+{
+  "version": "2.0",
+  "name": "ppm3-client",
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "framework": "vite"
+}

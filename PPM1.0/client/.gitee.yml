@@ -1,0 +1,30 @@
+# Gitee Go 部署配置
+name: Deploy to Gitee Pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+          
+      - name: Deploy to Gitee Pages
+        uses: yangyang923/gitee-pages-action@v1
+        with:
+          gitee-username: ${{ secrets.GITEE_USERNAME }}
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          gitee-repo: ${{ secrets.GITEE_REPO }}
+          branch: main
