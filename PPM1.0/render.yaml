@@ -1,25 +1,20 @@
 # Render Blueprint for PPM 3.0 Application
 # https://render.com/docs/blueprint-spec
 
-blueprintVersion: 1
-
 # Define the database service
 databases:
   - name: ppm3-mongodb
     databaseName: ppm3
     user: admin
     plan: free
-    disk: 10
 
-# Define the Redis service
-redises:
-  - name: ppm3-redis
+# Define all services (Redis + web services)
+services:
+  - type: keyvalue
+    name: ppm3-redis
     plan: free
     maxmemoryPolicy: noeviction
     maxmemorySamples: 5
-
-# Define the web services
-services:
   - type: web
     name: ppm3-backend
     env: node
@@ -36,7 +31,7 @@ services:
           property: connectionString
       - key: REDIS_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: ppm3-redis
           property: connectionString
       - key: JWT_SECRET
